@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Tournament Info - Naija5Fest</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .tournament-container {
+            margin-top: 70px;
+        }
+
+        .tournament-hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .tournament-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .about-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .about-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 1.5rem;
+        }
+
+        .rules-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .rules-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .rule-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .rule-card h4 {
+            color: var(--primary-green);
+            margin-bottom: 15px;
+        }
+
+        .fixtures-section {
+            padding: 80px 0;
+        }
+
+        .fixtures-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tournament-selector {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .selector-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .selector-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .selector-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .bracket-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        .bracket {
+            display: flex;
+            gap: 40px;
+            min-width: 800px;
+        }
+
+        .bracket-round {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .round-title {
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            padding: 10px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+        }
+
+        .match {
+            background: var(--white);
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .team {
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .team:last-child {
+            border-bottom: none;
+        }
+
+        .team.winner {
+            background: var(--light-gray);
+            font-weight: bold;
+        }
+
+        .team-name {
+            flex: 1;
+        }
+
+        .team-score {
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .match-time {
+            text-align: center;
+            padding: 8px;
+            background: var(--light-gray);
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .teams-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .teams-filters {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .team-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .team-logo {
+            width: 100%;
+            height: 150px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-light);
+        }
+
+        .team-info {
+            padding: 20px;
+        }
+
+        .team-info h4 {
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .team-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .tournament-hero h1 {
+                font-size: 2rem;
+            }
+
+            .tournament-selector {
+                flex-direction: column;
+            }
+
+            .bracket {
+                min-width: 600px;
+            }
+
+            .teams-filters {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">Naija5Fest</a></h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tournament.html" class="nav-link active">Tournament</a>
+                <a href="registration.html" class="nav-link">Register</a>
+                <a href="fanzone.html" class="nav-link">Fan Zone</a>
+                <a href="sponsors.html" class="nav-link">Sponsors</a>
+                <a href="media.html" class="nav-link">Media</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tournament-container">
+        <!-- Tournament Hero -->
+        <section class="tournament-hero">
+            <div class="container">
+                <h1>About Naija5Fest</h1>
+                <p>Nigeria's Premier Grassroots Football Tournament</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Mission & Vision</h2>
+                    <p>Celebrating the beautiful game across all 37 states of Nigeria</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Our Mission</h3>
+                        <p>To create the largest grassroots football platform in Nigeria, providing opportunities for amateur players to showcase their talents and connect communities through the beautiful game.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Our Vision</h3>
+                        <p>To become the premier grassroots football tournament that unites Nigeria, celebrates diversity, and nurtures the next generation of football stars from every corner of the nation.</p>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Core Values</h3>
+                        <p>Excellence, Inclusivity, Fair Play, Community Spirit, and Passion for Football. We believe in giving every player, regardless of background, the chance to shine on the national stage.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 60px; text-align: center;">
+                    <h3>Dual-Tier Tournament Structure</h3>
+                    <p style="max-width: 800px; margin: 20px auto; font-size: 1.1rem; color: var(--text-light);">
+                        Naija5Fest features a unique dual-tier structure with separate Male and Female categories across all 37 states. 
+                        This ensures equal representation and opportunities for both genders, making it truly inclusive and representative of Nigeria's diverse football talent.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rules Section -->
+        <section class="rules-section">
+            <div class="container">
+                <div class="rules-container">
+                    <div class="section-header">
+                        <h2>Tournament Rules & Format</h2>
+                        <p>Everything you need to know about participating in Naija5Fest</p>
+                    </div>
+
+                    <div class="rules-grid">
+                        <div class="rule-card">
+                            <h4><i class="fas fa-users"></i> Team Composition</h4>
+                            <ul>
+                                <li>5-8 players per team</li>
+                                <li>Minimum 5 players required</li>
+                                <li>All players must be amateurs</li>
+                                <li>No NFF registered professionals</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card">
+                            <h4><i class="fas fa-clock"></i> Match Duration</h4>
+                            <ul>
+                                <li>Two halves of 15 minutes each</li>
+                                <li>5-minute half-time break</li>
+                                <li>Extra time: 2 x 5 minutes</li>
+                                <li>Penalty shootout if tied</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card">
+                            <h4><i class="fas fa-map-marker-alt"></i> Field Specifications</h4>
+                            <ul>
+                                <li>Standard 5-aside pitch size</li>
+                                <li>Artificial or natural grass</li>
+                                <li>Goal size: 3m x 2m</li>
+                                <li>Penalty area: 6m from goal line</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card">
+                            <h4><i class="fas fa-exchange-alt"></i> Substitutions</h4>
+                            <ul>
+                                <li>Unlimited substitutions</li>
+                                <li>Rolling substitutions allowed</li>
+                                <li>Must be made at halfway line</li>
+                                <li>With referee's permission</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card">
+                            <h4><i class="fas fa-id-card"></i> Eligibility</h4>
+                            <ul>
+                                <li>Nigerian citizens only</li>
+                                <li>Valid ID required</li>
+                                <li>Age verification mandatory</li>
+                                <li>State of origin determines participation</li>
+                            </ul>
+                        </div>
+
+                        <div class="rule-card">
+                            <h4><i class="fas fa-trophy"></i> Tournament Format</h4>
+                            <ul>
+                                <li>State-level qualifiers first</li>
+                                <li>Knockout format</li>
+                                <li>Winners advance to Grand Finale</li>
+                                <li>National champions crowned</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fixtures Section -->
+        <section class="fixtures-section">
+            <div class="container">
+                <div class="fixtures-container">
+                    <div class="section-header">
+                        <h2>Fixtures & Results</h2>
+                        <p>Track your team's progress through the tournament</p>
+                    </div>
+
+                    <div class="tournament-selector">
+                        <div class="selector-group">
+                            <label for="stateSelect">Select State:</label>
+                            <select id="stateSelect">
+                                <option value="">Choose State</option>
+                            </select>
+                        </div>
+                        <div class="selector-group">
+                            <label for="categorySelect">Select Category:</label>
+                            <select id="categorySelect">
+                                <option value="">Choose Category</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="bracket-container" id="bracketContainer">
+                        <div style="text-align: center; padding: 40px; color: var(--text-light);">
+                            <i class="fas fa-info-circle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                            <h3>Select State and Category</h3>
+                            <p>Choose your state and category above to view the tournament bracket</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Teams Section -->
+        <section class="teams-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Registered Teams</h2>
+                    <p>Browse all teams participating in Naija5Fest</p>
+                </div>
+
+                <div class="teams-filters">
+                    <div class="selector-group">
+                        <label for="filterState">Filter by State:</label>
+                        <select id="filterState">
+                            <option value="">All States</option>
+                        </select>
+                    </div>
+                    <div class="selector-group">
+                        <label for="filterCategory">Filter by Category:</label>
+                        <select id="filterCategory">
+                            <option value="">All Categories</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="teams-grid" id="teamsGrid">
+                    <!-- Teams will be populated dynamically -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        function initTournamentPage() {
+            populateStateSelectors();
+            initTournamentSelector();
+            loadRegisteredTeams();
+            initTeamFilters();
+        }
+
+        function populateStateSelectors() {
+            const selectors = ['stateSelect', 'filterState'];
+            selectors.forEach(selectorId => {
+                const select = document.getElementById(selectorId);
+                window.NaijaFest.nigerianStates.forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state.toLowerCase().replace(/\s+/g, '_');
+                    option.textContent = state;
+                    select.appendChild(option);
+                });
+            });
+        }
+
+        function initTournamentSelector() {
+            const stateSelect = document.getElementById('stateSelect');
+            const categorySelect = document.getElementById('categorySelect');
+            const bracketContainer = document.getElementById('bracketContainer');
+
+            function updateBracket() {
+                const state = stateSelect.value;
+                const category = categorySelect.value;
+
+                if (state && category) {
+                    generateTournamentBracket(state, category);
+                } else {
+                    bracketContainer.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: var(--text-light);">
+                            <i class="fas fa-info-circle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                            <h3>Select State and Category</h3>
+                            <p>Choose your state and category above to view the tournament bracket</p>
+                        </div>
+                    `;
+                }
+            }
+
+            stateSelect.addEventListener('change', updateBracket);
+            categorySelect.addEventListener('change', updateBracket);
+        }
+
+        function generateTournamentBracket(state, category) {
+            const bracketContainer = document.getElementById('bracketContainer');
+            
+            // Sample tournament data (in real app, this would come from backend)
+            const sampleTeams = [
+                'Eagles FC', 'Lions United', 'Tigers FC', 'Wolves FC',
+                'Panthers FC', 'Hawks United', 'Falcons FC', 'Sharks FC'
+            ];
+
+            const bracket = `
+                <div class="bracket">
+                    <div class="bracket-round">
+                        <div class="round-title">Quarter Finals</div>
+                        ${generateMatches([
+                            { team1: sampleTeams[0], team2: sampleTeams[1], score1: 3, score2: 1, winner: 1 },
+                            { team1: sampleTeams[2], team2: sampleTeams[3], score1: 2, score2: 4, winner: 2 },
+                            { team1: sampleTeams[4], team2: sampleTeams[5], score1: 1, score2: 0, winner: 1 },
+                            { team1: sampleTeams[6], team2: sampleTeams[7], score1: 2, score2: 2, winner: 0 }
+                        ])}
+                    </div>
+                    <div class="bracket-round">
+                        <div class="round-title">Semi Finals</div>
+                        ${generateMatches([
+                            { team1: sampleTeams[0], team2: sampleTeams[3], score1: '', score2: '', winner: 0 },
+                            { team1: sampleTeams[4], team2: sampleTeams[6], score1: '', score2: '', winner: 0 }
+                        ])}
+                    </div>
+                    <div class="bracket-round">
+                        <div class="round-title">Final</div>
+                        ${generateMatches([
+                            { team1: 'TBD', team2: 'TBD', score1: '', score2: '', winner: 0 }
+                        ])}
+                    </div>
+                </div>
+            `;
+
+            bracketContainer.innerHTML = bracket;
+        }
+
+        function generateMatches(matches) {
+            return matches.map(match => `
+                <div class="match">
+                    <div class="match-time">Match Date: TBD</div>
+                    <div class="team ${match.winner === 1 ? 'winner' : ''}">
+                        <span class="team-name">${match.team1}</span>
+                        <span class="team-score">${match.score1}</span>
+                    </div>
+                    <div class="team ${match.winner === 2 ? 'winner' : ''}">
+                        <span class="team-name">${match.team2}</span>
+                        <span class="team-score">${match.score2}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadRegisteredTeams() {
+            const teamsGrid = document.getElementById('teamsGrid');
+            const registeredTeams = window.NaijaFest.getRegisteredTeams();
+
+            if (registeredTeams.length === 0) {
+                // Show sample teams for demo
+                const sampleTeams = [
+                    { teamName: 'Lagos Eagles', state: 'lagos', category: 'male', players: 6 },
+                    { teamName: 'Kano Lions', state: 'kano', category: 'male', players: 7 },
+                    { teamName: 'Abuja Queens', state: 'fct', category: 'female', players: 5 },
+                    { teamName: 'Rivers Dolphins', state: 'rivers', category: 'female', players: 8 },
+                    { teamName: 'Ogun Warriors', state: 'ogun', category: 'male', players: 6 },
+                    { teamName: 'Kaduna Amazons', state: 'kaduna', category: 'female', players: 7 }
+                ];
+
+                displayTeams(sampleTeams);
+            } else {
+                displayTeams(registeredTeams);
+            }
+        }
+
+        function displayTeams(teams) {
+            const teamsGrid = document.getElementById('teamsGrid');
+            
+            teamsGrid.innerHTML = teams.map(team => `
+                <div class="team-card" data-state="${team.state}" data-category="${team.category}">
+                    <div class="team-logo">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="team-info">
+                        <h4>${team.teamName}</h4>
+                        <div class="team-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> ${team.state ? team.state.charAt(0).toUpperCase() + team.state.slice(1) : 'N/A'}</span>
+                            <span><i class="fas fa-users"></i> ${team.players ? team.players.length || team.players : 'N/A'} players</span>
+                        </div>
+                        <div class="team-meta">
+                            <span><i class="fas fa-venus-mars"></i> ${team.category ? team.category.charAt(0).toUpperCase() + team.category.slice(1) : 'N/A'}</span>
+                            <span><i class="fas fa-calendar"></i> Registered</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function initTeamFilters() {
+            const filterState = document.getElementById('filterState');
+            const filterCategory = document.getElementById('filterCategory');
+
+            function filterTeams() {
+                const stateFilter = filterState.value;
+                const categoryFilter = filterCategory.value;
+                const teamCards = document.querySelectorAll('.team-card');
+
+                teamCards.forEach(card => {
+                    const teamState = card.getAttribute('data-state');
+                    const teamCategory = card.getAttribute('data-category');
+
+                    const stateMatch = !stateFilter || teamState === stateFilter;
+                    const categoryMatch = !categoryFilter || teamCategory === categoryFilter;
+
+                    if (stateMatch && categoryMatch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            filterState.addEventListener('change', filterTeams);
+            filterCategory.addEventListener('change', filterTeams);
+        }
+
+        // Initialize tournament page
+        document.addEventListener('DOMContentLoaded', initTournamentPage);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Media & News - Naija5Fest</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .media-container {
+            margin-top: 70px;
+        }
+
+        .media-hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .media-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-nav {
+            background: var(--white);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+        }
+
+        .media-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .media-nav-menu {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .media-nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .media-nav-link:hover,
+        .media-nav-link.active {
+            background: var(--primary-green);
+            color: var(--white);
+        }
+
+        .media-section {
+            padding: 80px 0;
+            display: none;
+        }
+
+        .media-section.active {
+            display: block;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+        }
+
+        .news-content {
+            padding: 25px;
+        }
+
+        .news-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 1.3rem;
+            color: var(--primary-green);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .news-excerpt {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--secondary-green);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .video-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff8c42);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .play-button {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            font-size: 1.5rem;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .video-meta {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .photo-item {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: var(--white);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .photo-item:hover .photo-overlay {
+            transform: translateY(0);
+        }
+
+        .live-stream-section {
+            background: var(--light-gray);
+        }
+
+        .stream-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stream-player {
+            width: 100%;
+            height: 450px;
+            background: var(--dark-gray);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .stream-info {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .press-releases {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .press-item {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        .press-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .press-title {
+            font-size: 1.4rem;
+            color: var(--primary-green);
+            font-weight: bold;
+            flex: 1;
+        }
+
+        .press-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-left: 20px;
+        }
+
+        .press-content {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-green);
+            color: var(--white);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 15px;
+        }
+
+        .download-btn:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .media-hero h1 {
+                font-size: 2rem;
+            }
+
+            .media-nav-menu {
+                gap: 15px;
+            }
+
+            .media-nav-link {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .news-grid,
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .photo-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stream-player {
+                height: 250px;
+            }
+
+            .press-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .press-date {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">Naija5Fest</a></h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tournament.html" class="nav-link">Tournament</a>
+                <a href="registration.html" class="nav-link">Register</a>
+                <a href="fanzone.html" class="nav-link">Fan Zone</a>
+                <a href="sponsors.html" class="nav-link">Sponsors</a>
+                <a href="media.html" class="nav-link active">Media</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="media-container">
+        <!-- Media Hero -->
+        <section class="media-hero">
+            <div class="container">
+                <h1>Media & Newsroom</h1>
+                <p>Stay updated with the latest from Naija5Fest</p>
+            </div>
+        </section>
+
+        <!-- Media Navigation -->
+        <nav class="media-nav">
+            <div class="media-nav-container">
+                <div class="media-nav-menu">
+                    <a href="#" class="media-nav-link active" data-section="news">Latest News</a>
+                    <a href="#" class="media-nav-link" data-section="videos">Videos</a>
+                    <a href="#" class="media-nav-link" data-section="photos">Photo Gallery</a>
+                    <a href="#" class="media-nav-link" data-section="live">Live Stream</a>
+                    <a href="#" class="media-nav-link" data-section="press">Press Releases</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Latest News Section -->
+        <section class="media-section active" id="news">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Latest News</h2>
+                    <p>Stay informed with the latest updates from Naija5Fest</p>
+                </div>
+
+                <div class="news-grid" id="newsGrid">
+                    <!-- News items will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Videos Section -->
+        <section class="media-section" id="videos">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Video Gallery</h2>
+                    <p>Watch highlights, interviews, and behind-the-scenes content</p>
+                </div>
+
+                <div class="video-grid" id="videoGrid">
+                    <!-- Video items will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section class="media-section" id="photos">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Photo Gallery</h2>
+                    <p>Capture the moments that define Naija5Fest</p>
+                </div>
+
+                <div class="photo-grid" id="photoGrid">
+                    <!-- Photo items will be populated here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Stream Section -->
+        <section class="media-section live-stream-section" id="live">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Live Stream</h2>
+                    <p>Watch matches live as they happen</p>
+                </div>
+
+                <div class="stream-container">
+                    <div class="stream-player">
+                        <div style="text-align: center;">
+                            <i class="fas fa-video" style="font-size: 4rem; margin-bottom: 20px;"></i>
+                            <h3>Live Stream Coming Soon</h3>
+                            <p>Matches will be streamed live during tournament days</p>
+                        </div>
+                    </div>
+
+                    <div class="stream-info">
+                        <h3>Upcoming Matches</h3>
+                        <p>Live coverage of all state qualifiers and the Grand Finale will be available here. 
+                        Follow our social media channels for live updates and streaming notifications.</p>
+                        
+                        <div style="margin-top: 20px;">
+                            <a href="#" class="btn btn-primary" style="margin-right: 10px;">
+                                <i class="fab fa-youtube"></i> YouTube
+                            </a>
+                            <a href="#" class="btn btn-primary" style="margin-right: 10px;">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </a>
+                            <a href="#" class="btn btn-primary">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Press Releases Section -->
+        <section class="media-section" id="press">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Press Releases</h2>
+                    <p>Official announcements and media resources</p>
+                </div>
+
+                <div class="press-releases" id="pressReleases">
+                    <!-- Press releases will be populated here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        function initMediaPage() {
+            initMediaNavigation();
+            loadNewsItems();
+            loadVideoItems();
+            loadPhotoItems();
+            loadPressReleases();
+        }
+
+        function initMediaNavigation() {
+            const mediaLinks = document.querySelectorAll('.media-nav-link');
+            const mediaSections = document.querySelectorAll('.media-section');
+
+            mediaLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetSection = this.getAttribute('data-section');
+                    
+                    // Update active link
+                    mediaLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target section
+                    mediaSections.forEach(section => {
+                        section.classList.remove('active');
+                        if (section.id === targetSection) {
+                            section.classList.add('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        function loadNewsItems() {
+            const newsGrid = document.getElementById('newsGrid');
+            
+            const newsItems = [
+                {
+                    title: 'Naija5Fest 2024 Registration Opens',
+                    date: '2024-10-25',
+                    excerpt: 'Team registration is now open for all 37 states. Early bird registration ends in 48 hours with special incentives for the first 100 teams.',
+                    image: 'news'
+                },
+                {
+                    title: 'Major Sponsor Partnership Announced',
+                    date: '2024-10-20',
+                    excerpt: 'We are excited to announce our partnership with leading Nigerian brands who will support grassroots football development across the nation.',
+                    image: 'partnership'
+                },
+                {
+                    title: 'Tournament Rules and Format Released',
+                    date: '2024-10-15',
+                    excerpt: 'Complete tournament regulations, eligibility criteria, and match format have been published. All teams are encouraged to review the guidelines.',
+                    image: 'rules'
+                },
+                {
+                    title: 'State Coordinators Appointed',
+                    date: '2024-10-10',
+                    excerpt: 'Local coordinators have been appointed for all 37 states to ensure smooth tournament operations and support for participating teams.',
+                    image: 'coordinators'
+                },
+                {
+                    title: 'Fan Engagement Platform Launched',
+                    date: '2024-10-05',
+                    excerpt: 'The new fan zone allows supporters to register, get referral codes, and participate in exciting activities throughout the tournament.',
+                    image: 'fanzone'
+                },
+                {
+                    title: 'Venue Partnerships Confirmed',
+                    date: '2024-09-30',
+                    excerpt: 'Premium football facilities across Nigeria have been secured for state qualifiers, ensuring top-quality playing conditions for all teams.',
+                    image: 'venues'
+                }
+            ];
+
+            newsGrid.innerHTML = newsItems.map(item => `
+                <article class="news-card">
+                    <div class="news-image">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="news-content">
+                        <div class="news-date">${formatDate(item.date)}</div>
+                        <h3 class="news-title">${item.title}</h3>
+                        <p class="news-excerpt">${item.excerpt}</p>
+                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function loadVideoItems() {
+            const videoGrid = document.getElementById('videoGrid');
+            
+            const videoItems = [
+                {
+                    title: 'Naija5Fest 2024 Official Trailer',
+                    duration: '2:30',
+                    views: '15K views',
+                    date: '1 week ago'
+                },
+                {
+                    title: 'Tournament Rules Explained',
+                    duration: '5:45',
+                    views: '8.2K views',
+                    date: '2 weeks ago'
+                },
+                {
+                    title: 'State Coordinators Introduction',
+                    duration: '3:15',
+                    views: '5.7K views',
+                    date: '3 weeks ago'
+                },
+                {
+                    title: 'Fan Zone Features Overview',
+                    duration: '4:20',
+                    views: '12K views',
+                    date: '1 month ago'
+                },
+                {
+                    title: 'Sponsor Partnership Announcement',
+                    duration: '1:50',
+                    views: '6.8K views',
+                    date: '1 month ago'
+                },
+                {
+                    title: 'Behind the Scenes: Tournament Prep',
+                    duration: '8:30',
+                    views: '9.3K views',
+                    date: '2 months ago'
+                }
+            ];
+
+            videoGrid.innerHTML = videoItems.map(item => `
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h4 class="video-title">${item.title}</h4>
+                        <div class="video-meta">
+                            ${item.duration} • ${item.views} • ${item.date}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadPhotoItems() {
+            const photoGrid = document.getElementById('photoGrid');
+            
+            const photoCategories = [
+                'Team Registration Events',
+                'State Coordinator Meetings',
+                'Venue Preparations',
+                'Sponsor Announcements',
+                'Fan Zone Activities',
+                'Media Interviews',
+                'Tournament Planning',
+                'Community Outreach',
+                'Training Sessions',
+                'Press Conferences',
+                'Partnership Signings',
+                'Venue Tours'
+            ];
+
+            photoGrid.innerHTML = photoCategories.map(category => `
+                <div class="photo-item">
+                    <div class="photo-placeholder">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <div class="photo-overlay">
+                        <h4>${category}</h4>
+                        <p>View Gallery</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadPressReleases() {
+            const pressReleases = document.getElementById('pressReleases');
+            
+            const releases = [
+                {
+                    title: 'Naija5Fest 2024: Nigeria\'s Largest Grassroots Football Tournament Launches',
+                    date: '2024-10-25',
+                    content: 'Lagos, Nigeria - Naija5Fest, Nigeria\'s premier grassroots football tournament, officially opens registration for its inaugural 2024 edition. The tournament will feature 74 concurrent competitions across all 37 states, with separate male and female categories, making it the largest grassroots football initiative in Nigerian history.'
+                },
+                {
+                    title: 'Strategic Partnerships Drive Naija5Fest\'s National Expansion',
+                    date: '2024-10-20',
+                    content: 'The tournament organizers announce major sponsorship deals with leading Nigerian corporations, ensuring comprehensive coverage and support for participating teams across all states. These partnerships will provide essential resources for venue preparation, equipment, and prize distribution.'
+                },
+                {
+                    title: 'Naija5Fest Introduces Revolutionary Fan Engagement Platform',
+                    date: '2024-10-15',
+                    content: 'A new digital platform allows football fans to actively participate in the tournament through referral programs, prediction games, and exclusive content access. The platform aims to create Nigeria\'s largest football community, connecting fans from all 37 states.'
+                }
+            ];
+
+            pressReleases.innerHTML = releases.map(release => `
+                <article class="press-item">
+                    <div class="press-header">
+                        <h3 class="press-title">${release.title}</h3>
+                        <div class="press-date">${formatDate(release.date)}</div>
+                    </div>
+                    <div class="press-content">
+                        <p>${release.content}</p>
+                    </div>
+                    <a href="#" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        Download Full Release
+                    </a>
+                </article>
+            `).join('');
+        }
+
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Initialize media page
+        document.addEventListener('DOMContentLoaded', initMediaPage);
+    </script>
+</body>
+
+</html>

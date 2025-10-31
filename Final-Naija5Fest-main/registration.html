@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Team Registration - Naija5Fest</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .registration-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .registration-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .registration-header h1 {
+            color: var(--primary-green);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .registration-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+        }
+
+        .form-section h3 {
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .players-section {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-top: 20px;
+        }
+
+        .player-card {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .player-number {
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--primary-green);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .remove-player {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #dc3545;
+            color: var(--white);
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .add-player-btn {
+            background: var(--secondary-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: block;
+            padding: 12px;
+            border: 2px dashed #ddd;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--primary-green);
+            background: var(--light-gray);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .fee-info {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .fee-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .payment-section {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        @media (max-width: 768px) {
+            .registration-container {
+                margin-top: 80px;
+            }
+
+            .registration-form {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">Naija5Fest</a></h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tournament.html" class="nav-link">Tournament</a>
+                <a href="registration.html" class="nav-link active">Register</a>
+                <a href="fanzone.html" class="nav-link">Fan Zone</a>
+                <a href="sponsors.html" class="nav-link">Sponsors</a>
+                <a href="media.html" class="nav-link">Media</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Content -->
+    <div class="registration-container">
+        <div class="registration-header">
+            <h1>Team Registration</h1>
+            <p>Join Nigeria's biggest grassroots football tournament</p>
+        </div>
+
+        <form class="registration-form" id="registrationForm">
+            <!-- Team Information -->
+            <div class="form-section">
+                <h3><i class="fas fa-users"></i> Team Information</h3>
+                
+                <div class="form-group">
+                    <label for="teamName">Team Name *</label>
+                    <input type="text" id="teamName" name="teamName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State *</label>
+                        <select id="state" name="state" required>
+                            <option value="">Select State</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="teamLogo">Team Logo *</label>
+                    <div class="file-upload">
+                        <input type="file" id="teamLogo" name="teamLogo" accept="image/*" required>
+                        <label for="teamLogo" class="file-upload-label">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click to upload team logo</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Manager Information -->
+            <div class="form-section">
+                <h3><i class="fas fa-user-tie"></i> Team Manager Information</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="managerName">Full Name *</label>
+                        <input type="text" id="managerName" name="managerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="managerPhone">Phone Number *</label>
+                        <input type="tel" id="managerPhone" name="managerPhone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="managerEmail">Email Address *</label>
+                    <input type="email" id="managerEmail" name="managerEmail" required>
+                </div>
+            </div>
+
+            <!-- Players Information -->
+            <div class="form-section">
+                <h3><i class="fas fa-running"></i> Players Information</h3>
+                <p>Add 5-8 players (minimum 5 required)</p>
+                
+                <div class="players-section" id="playersContainer">
+                    <!-- Players will be added dynamically -->
+                </div>
+                
+                <button type="button" class="add-player-btn" id="addPlayerBtn">
+                    <i class="fas fa-plus"></i> Add Player
+                </button>
+            </div>
+
+            <!-- Eligibility Confirmation -->
+            <div class="form-section">
+                <h3><i class="fas fa-check-circle"></i> Eligibility Confirmation</h3>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="eligibilityConfirm" name="eligibilityConfirm" required>
+                    <label for="eligibilityConfirm">
+                        We confirm that all players are amateurs and not registered professionals with the NFF. *
+                    </label>
+                </div>
+            </div>
+
+            <!-- Payment Information -->
+            <div class="form-section">
+                <h3><i class="fas fa-credit-card"></i> Verification Fee</h3>
+                
+                <div class="fee-info">
+                    <p>Registration is FREE, but a verification fee is required</p>
+                    <div class="fee-amount">₦5,700</div>
+                    <p>This fee confirms your team's commitment to participate</p>
+                </div>
+
+                <div class="payment-section">
+                    <h4>Payment Method</h4>
+                    <div class="form-group">
+                        <label for="paymentMethod">Select Payment Method *</label>
+                        <select id="paymentMethod" name="paymentMethod" required>
+                            <option value="">Choose Payment Method</option>
+                            <option value="paystack">Paystack (Card/Bank Transfer)</option>
+                            <option value="bank_transfer">Direct Bank Transfer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                Complete Registration & Pay ₦5,700
+            </button>
+        </form>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        // Registration form functionality
+        function initRegistrationForm() {
+            const form = document.getElementById('registrationForm');
+            const stateSelect = document.getElementById('state');
+            const playersContainer = document.getElementById('playersContainer');
+            const addPlayerBtn = document.getElementById('addPlayerBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const eligibilityConfirm = document.getElementById('eligibilityConfirm');
+            
+            let playerCount = 0;
+
+            // Populate states dropdown
+            window.NaijaFest.nigerianStates.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state.toLowerCase().replace(/\s+/g, '_');
+                option.textContent = state;
+                stateSelect.appendChild(option);
+            });
+
+            // Add initial players
+            for (let i = 0; i < 5; i++) {
+                addPlayer();
+            }
+
+            // Add player functionality
+            addPlayerBtn.addEventListener('click', addPlayer);
+
+            function addPlayer() {
+                if (playerCount >= 8) {
+                    showNotification('Maximum 8 players allowed', 'error');
+                    return;
+                }
+
+                playerCount++;
+                const playerCard = document.createElement('div');
+                playerCard.className = 'player-card';
+                playerCard.innerHTML = `
+                    <div class="player-number">${playerCount}</div>
+                    ${playerCount > 5 ? '<button type="button" class="remove-player" onclick="removePlayer(this)">×</button>' : ''}
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Player Name *</label>
+                            <input type="text" name="player_${playerCount}_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth *</label>
+                            <input type="date" name="player_${playerCount}_dob" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Position *</label>
+                            <select name="player_${playerCount}_position" required>
+                                <option value="">Select Position</option>
+                                <option value="goalkeeper">Goalkeeper</option>
+                                <option value="defender">Defender</option>
+                                <option value="midfielder">Midfielder</option>
+                                <option value="forward">Forward</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Jersey Size *</label>
+                            <select name="player_${playerCount}_jersey" required>
+                                <option value="">Select Size</option>
+                                <option value="XS">XS</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+                playersContainer.appendChild(playerCard);
+                updateAddPlayerButton();
+            }
+
+            // Remove player functionality
+            window.removePlayer = function(button) {
+                button.parentElement.remove();
+                playerCount--;
+                updatePlayerNumbers();
+                updateAddPlayerButton();
+            };
+
+            function updatePlayerNumbers() {
+                const playerCards = playersContainer.querySelectorAll('.player-card');
+                playerCards.forEach((card, index) => {
+                    const numberElement = card.querySelector('.player-number');
+                    numberElement.textContent = index + 1;
+                    
+                    // Update input names
+                    const inputs = card.querySelectorAll('input, select');
+                    inputs.forEach(input => {
+                        const name = input.name;
+                        if (name.startsWith('player_')) {
+                            const suffix = name.split('_').slice(2).join('_');
+                            input.name = `player_${index + 1}_${suffix}`;
+                        }
+                    });
+                });
+            }
+
+            function updateAddPlayerButton() {
+                addPlayerBtn.style.display = playerCount >= 8 ? 'none' : 'block';
+            }
+
+            // Enable submit button when eligibility is confirmed
+            eligibilityConfirm.addEventListener('change', function() {
+                submitBtn.disabled = !this.checked;
+            });
+
+            // File upload preview
+            document.getElementById('teamLogo').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const label = e.target.nextElementSibling;
+                    label.innerHTML = `<i class="fas fa-check"></i> ${file.name}`;
+                    label.style.borderColor = 'var(--primary-green)';
+                    label.style.background = 'var(--light-gray)';
+                }
+            });
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const teamData = {};
+                
+                // Collect form data
+                for (let [key, value] of formData.entries()) {
+                    teamData[key] = value;
+                }
+
+                // Collect players data
+                teamData.players = [];
+                for (let i = 1; i <= playerCount; i++) {
+                    const player = {
+                        name: formData.get(`player_${i}_name`),
+                        dob: formData.get(`player_${i}_dob`),
+                        position: formData.get(`player_${i}_position`),
+                        jersey: formData.get(`player_${i}_jersey`)
+                    };
+                    teamData.players.push(player);
+                }
+
+                // Validate minimum players
+                if (teamData.players.length < 5) {
+                    showNotification('Minimum 5 players required', 'error');
+                    return;
+                }
+
+                // Simulate payment process
+                simulatePayment(teamData);
+            });
+
+            function simulatePayment(teamData) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Processing Payment...';
+
+                // Simulate payment delay
+                setTimeout(() => {
+                    // Save team data
+                    const teamId = window.NaijaFest.saveTeamData(teamData);
+                    
+                    // Show success message
+                    showNotification('Registration successful! Check your email for confirmation.', 'success');
+                    
+                    // Generate referral link
+                    const referralLink = `${window.location.origin}/fanzone.html?ref=${teamId}`;
+                    
+                    // Show confirmation modal
+                    showRegistrationSuccess(teamId, referralLink);
+                    
+                    // Reset form
+                    form.reset();
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Complete Registration & Pay ₦5,700';
+                    
+                }, 2000);
+            }
+
+            function showRegistrationSuccess(teamId, referralLink) {
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                `;
+                
+                modal.innerHTML = `
+                    <div style="background: white; padding: 40px; border-radius: 10px; max-width: 500px; text-align: center;">
+                        <div style="color: var(--primary-green); font-size: 3rem; margin-bottom: 20px;">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2 style="color: var(--primary-green); margin-bottom: 20px;">Registration Successful!</h2>
+                        <p style="margin-bottom: 20px;">Your Team ID: <strong>${teamId}</strong></p>
+                        <p style="margin-bottom: 20px;">Share this link with 5,000 fans to support your team:</p>
+                        <div style="background: var(--light-gray); padding: 10px; border-radius: 5px; margin: 20px 0; word-break: break-all;">
+                            ${referralLink}
+                        </div>
+                        <button onclick="this.parentElement.parentElement.remove()" 
+                                style="background: var(--primary-green); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                            Close
+                        </button>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+            }
+        }
+
+        // Initialize registration form when page loads
+        document.addEventListener('DOMContentLoaded', initRegistrationForm);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Fan Zone - Naija5Fest</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .fanzone-container {
+            margin-top: 70px;
+        }
+
+        .fanzone-hero {
+            background: linear-gradient(135deg, var(--accent-orange), #ff8c42);
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .fanzone-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .fan-registration-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .fan-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .referral-section {
+            padding: 80px 0;
+        }
+
+        .referral-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .referral-code {
+            background: var(--light-gray);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-family: monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px 0;
+            border: 2px dashed var(--accent-orange);
+        }
+
+        .copy-btn {
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: #e55a2b;
+        }
+
+        .leaderboard-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .leaderboard {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .leaderboard-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .leaderboard-item:hover {
+            background: var(--light-gray);
+        }
+
+        .leaderboard-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-green);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+
+        .rank.top3 {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: var(--text-dark);
+        }
+
+        .fan-info {
+            flex: 1;
+        }
+
+        .fan-name {
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .fan-location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .referral-count {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .activities-section {
+            padding: 80px 0;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .activity-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .activity-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff8c42);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-orange);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .fanzone-hero h1 {
+                font-size: 2rem;
+            }
+
+            .fan-form {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">Naija5Fest</a></h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tournament.html" class="nav-link">Tournament</a>
+                <a href="registration.html" class="nav-link">Register</a>
+                <a href="fanzone.html" class="nav-link active">Fan Zone</a>
+                <a href="sponsors.html" class="nav-link">Sponsors</a>
+                <a href="media.html" class="nav-link">Media</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="fanzone-container">
+        <!-- Fan Zone Hero -->
+        <section class="fanzone-hero">
+            <div class="container">
+                <h1>Join the Fan Zone</h1>
+                <p>Be part of Nigeria's biggest football celebration</p>
+            </div>
+        </section>
+
+        <!-- Fan Registration -->
+        <section class="fan-registration-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Register as a Fan</h2>
+                    <p>Get your unique referral code and start earning rewards</p>
+                </div>
+
+                <form class="fan-form" id="fanRegistrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fanFirstName">First Name *</label>
+                            <input type="text" id="fanFirstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fanLastName">Last Name *</label>
+                            <input type="text" id="fanLastName" name="lastName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fanEmail">Email Address *</label>
+                        <input type="email" id="fanEmail" name="email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fanPhone">Phone Number *</label>
+                            <input type="tel" id="fanPhone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fanState">State *</label>
+                            <select id="fanState" name="state" required>
+                                <option value="">Select State</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favoriteTeam">Favorite Team (Optional)</label>
+                        <input type="text" id="favoriteTeam" name="favoriteTeam" placeholder="Enter team name">
+                    </div>
+
+                    <button type="submit" class="submit-btn">Register & Get Referral Code</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Referral Section -->
+        <section class="referral-section" id="referralSection" style="display: none;">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Your Referral Code</h2>
+                    <p>Share this code with friends and climb the leaderboard</p>
+                </div>
+
+                <div class="referral-card">
+                    <h3>Your Unique Referral Code</h3>
+                    <div class="referral-code" id="referralCode">NF12345678</div>
+                    <button class="copy-btn" onclick="copyReferralCode()">
+                        <i class="fas fa-copy"></i> Copy Code
+                    </button>
+                    <p style="margin-top: 20px; color: var(--text-light);">
+                        Share this code with friends when they register as fans. 
+                        The more people you refer, the higher you climb on our leaderboard!
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leaderboard -->
+        <section class="leaderboard-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Fan Referral Leaderboard</h2>
+                    <p>Top 100 fans who are spreading the Naija5Fest spirit</p>
+                </div>
+
+                <div class="leaderboard">
+                    <div class="leaderboard-header">
+                        <h3><i class="fas fa-trophy"></i> Top Referrers</h3>
+                        <p>Updated in real-time</p>
+                    </div>
+                    <div id="leaderboardList">
+                        <!-- Leaderboard items will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fan Activities -->
+        <section class="activities-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Fan Activities</h2>
+                    <p>Engage with the tournament and win amazing prizes</p>
+                </div>
+
+                <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h3>Refer Friends</h3>
+                        <p>Share your referral code with friends and family. Every successful referral moves you up the leaderboard and earns you points towards exciting prizes.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>Photo Contests</h3>
+                        <p>Share your best football moments and team support photos. Weekly contests with prizes for the most creative and engaging fan photos.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Prediction Games</h3>
+                        <p>Predict match results and tournament outcomes. Accurate predictions earn you points and a chance to win exclusive Naija5Fest merchandise.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Watch Parties</h3>
+                        <p>Join virtual watch parties for major matches. Connect with fans from across Nigeria and celebrate together as we crown our champions.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h3>Daily Challenges</h3>
+                        <p>Complete daily challenges like trivia questions, social media tasks, and team support activities to earn points and unlock rewards.</p>
+                    </div>
+
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>VIP Experiences</h3>
+                        <p>Top fans get exclusive access to VIP experiences including meet-and-greets with players, behind-the-scenes content, and special event invitations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        function initFanZone() {
+            populateFanStates();
+            initFanRegistration();
+            loadLeaderboard();
+            checkReferralParam();
+        }
+
+        function populateFanStates() {
+            const fanState = document.getElementById('fanState');
+            window.NaijaFest.nigerianStates.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state.toLowerCase().replace(/\s+/g, '_');
+                option.textContent = state;
+                fanState.appendChild(option);
+            });
+        }
+
+        function initFanRegistration() {
+            const form = document.getElementById('fanRegistrationForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const fanData = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    fanData[key] = value;
+                }
+
+                // Save fan data and get referral code
+                const savedFan = window.NaijaFest.saveFanData(fanData);
+                
+                // Show referral section
+                showReferralSection(savedFan.referralCode);
+                
+                // Show success message
+                showNotification('Registration successful! Your referral code is ready.', 'success');
+                
+                // Reset form
+                form.reset();
+            });
+        }
+
+        function showReferralSection(referralCode) {
+            const referralSection = document.getElementById('referralSection');
+            const referralCodeElement = document.getElementById('referralCode');
+            
+            referralCodeElement.textContent = referralCode;
+            referralSection.style.display = 'block';
+            
+            // Scroll to referral section
+            referralSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyReferralCode() {
+            const referralCode = document.getElementById('referralCode').textContent;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(referralCode).then(() => {
+                    showNotification('Referral code copied to clipboard!', 'success');
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = referralCode;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('Referral code copied to clipboard!', 'success');
+            }
+        }
+
+        function loadLeaderboard() {
+            const leaderboardList = document.getElementById('leaderboardList');
+            
+            // Get leaderboard data (sample data for demo)
+            const sampleLeaderboard = [
+                { name: 'Ahmed Musa', location: 'Lagos', referrals: 247 },
+                { name: 'Chioma Okafor', location: 'Anambra', referrals: 189 },
+                { name: 'Fatima Ibrahim', location: 'Kano', referrals: 156 },
+                { name: 'Emeka Okonkwo', location: 'Imo', referrals: 134 },
+                { name: 'Aisha Mohammed', location: 'FCT', referrals: 128 },
+                { name: 'Tunde Adebayo', location: 'Ogun', referrals: 112 },
+                { name: 'Grace Okoro', location: 'Rivers', referrals: 98 },
+                { name: 'Ibrahim Yusuf', location: 'Kaduna', referrals: 87 },
+                { name: 'Blessing Eze', location: 'Enugu', referrals: 76 },
+                { name: 'Musa Garba', location: 'Bauchi', referrals: 65 }
+            ];
+
+            leaderboardList.innerHTML = sampleLeaderboard.map((fan, index) => `
+                <div class="leaderboard-item">
+                    <div class="rank ${index < 3 ? 'top3' : ''}">${index + 1}</div>
+                    <div class="fan-info">
+                        <div class="fan-name">${fan.name}</div>
+                        <div class="fan-location"><i class="fas fa-map-marker-alt"></i> ${fan.location}</div>
+                    </div>
+                    <div class="referral-count">${fan.referrals} referrals</div>
+                </div>
+            `).join('');
+        }
+
+        function checkReferralParam() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            
+            if (refCode) {
+                // Show message about referral
+                showNotification(`You were referred by team ${refCode}! Register to support them.`, 'info');
+            }
+        }
+
+        // Initialize fan zone when page loads
+        document.addEventListener('DOMContentLoaded', initFanZone);
+    </script>
+</body>
+
+</html>

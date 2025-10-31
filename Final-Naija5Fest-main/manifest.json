@@ -1,0 +1,79 @@
+{
+  "name": "Naija5Fest - National 5-Aside Football Tournament",
+  "short_name": "Naija5Fest",
+  "description": "Nigeria's premier grassroots football tournament featuring 37 states, 74 tournaments, one national dream!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#008751",
+  "theme_color": "#008751",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["sports", "entertainment", "social"],
+  "icons": [
+    {
+      "src": "https://public-frontend-cos.metadl.com/mgx/img/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://public-frontend-cos.metadl.com/mgx/img/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://via.placeholder.com/1280x720/008751/ffffff?text=Naija5Fest+Homepage",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "https://via.placeholder.com/750x1334/008751/ffffff?text=Naija5Fest+Mobile",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Register Team",
+      "short_name": "Register",
+      "description": "Register your team for the tournament",
+      "url": "/registration.html",
+      "icons": [
+        {
+          "src": "https://public-frontend-cos.metadl.com/mgx/img/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Fan Zone",
+      "short_name": "Fans",
+      "description": "Join the fan community",
+      "url": "/fanzone.html",
+      "icons": [
+        {
+          "src": "https://public-frontend-cos.metadl.com/mgx/img/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Tournament Info",
+      "short_name": "Tournament",
+      "description": "View tournament details and fixtures",
+      "url": "/tournament.html",
+      "icons": [
+        {
+          "src": "https://public-frontend-cos.metadl.com/mgx/img/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}

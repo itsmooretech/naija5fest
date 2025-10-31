@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Sponsors - Naija5Fest</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sponsors-container {
+            margin-top: 70px;
+        }
+
+        .sponsors-hero {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .sponsors-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-proposition {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .packages-section {
+            padding: 80px 0;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .package-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .package-card.featured {
+            border: 3px solid var(--accent-orange);
+        }
+
+        .package-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent-orange);
+            color: var(--white);
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .package-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .package-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .package-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .package-period {
+            opacity: 0.8;
+        }
+
+        .package-content {
+            padding: 30px;
+        }
+
+        .package-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .package-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .package-features li:last-child {
+            border-bottom: none;
+        }
+
+        .package-features li i {
+            color: var(--primary-green);
+            margin-right: 10px;
+            width: 20px;
+        }
+
+        .contact-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-green);
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+
+        .current-sponsors {
+            padding: 80px 0;
+        }
+
+        .sponsors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .sponsor-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .sponsor-logo {
+            width: 100px;
+            height: 100px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 2rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .sponsors-hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><a href="index.html" style="text-decoration: none; color: inherit;">Naija5Fest</a></h2>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="tournament.html" class="nav-link">Tournament</a>
+                <a href="registration.html" class="nav-link">Register</a>
+                <a href="fanzone.html" class="nav-link">Fan Zone</a>
+                <a href="sponsors.html" class="nav-link active">Sponsors</a>
+                <a href="media.html" class="nav-link">Media</a>
+                <a href="index.html#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="sponsors-container">
+        <!-- Sponsors Hero -->
+        <section class="sponsors-hero">
+            <div class="container">
+                <h1>Partner with Naija5Fest</h1>
+                <p>Join Nigeria's biggest grassroots football celebration</p>
+            </div>
+        </section>
+
+        <!-- Value Proposition -->
+        <section class="value-proposition">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Sponsor Naija5Fest?</h2>
+                    <p>Reach millions of passionate football fans across Nigeria</p>
+                </div>
+
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Massive Reach</h3>
+                        <p>Connect with over 1 million football fans across all 37 states of Nigeria through our comprehensive tournament coverage and digital platforms.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Community Impact</h3>
+                        <p>Support grassroots football development and make a positive impact on communities while building brand loyalty and goodwill.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Brand Visibility</h3>
+                        <p>Gain extensive brand exposure through live broadcasts, social media coverage, merchandise, and on-ground activations throughout the tournament.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3>Partnership Benefits</h3>
+                        <p>Access exclusive networking opportunities, VIP experiences, and direct engagement with your target audience through our platform.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>Legacy Building</h3>
+                        <p>Be part of Nigeria's football history and build a lasting legacy by supporting the development of future football stars.</p>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <h3>National Coverage</h3>
+                        <p>Sponsor specific states or go national with comprehensive coverage across all regions, ensuring maximum brand penetration.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sponsorship Packages -->
+        <section class="packages-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Sponsorship Packages</h2>
+                    <p>Choose the perfect package for your brand</p>
+                </div>
+
+                <div class="packages-grid">
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-title">State Sponsor</div>
+                            <div class="package-price">₦2M</div>
+                            <div class="package-period">per state</div>
+                        </div>
+                        <div class="package-content">
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> Exclusive state naming rights</li>
+                                <li><i class="fas fa-check"></i> Logo on team jerseys</li>
+                                <li><i class="fas fa-check"></i> Stadium branding</li>
+                                <li><i class="fas fa-check"></i> Social media mentions</li>
+                                <li><i class="fas fa-check"></i> VIP match tickets (10)</li>
+                                <li><i class="fas fa-check"></i> Digital marketing assets</li>
+                                <li><i class="fas fa-check"></i> Press release features</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary">Choose Package</a>
+                        </div>
+                    </div>
+
+                    <div class="package-card featured">
+                        <div class="package-header">
+                            <div class="package-title">Regional Sponsor</div>
+                            <div class="package-price">₦10M</div>
+                            <div class="package-period">per region (6 states)</div>
+                        </div>
+                        <div class="package-content">
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> All State Sponsor benefits</li>
+                                <li><i class="fas fa-check"></i> Regional tournament naming</li>
+                                <li><i class="fas fa-check"></i> Live broadcast mentions</li>
+                                <li><i class="fas fa-check"></i> Halftime show sponsorship</li>
+                                <li><i class="fas fa-check"></i> VIP match tickets (50)</li>
+                                <li><i class="fas fa-check"></i> Exclusive networking events</li>
+                                <li><i class="fas fa-check"></i> Custom activation spaces</li>
+                                <li><i class="fas fa-check"></i> Player meet & greet</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary">Choose Package</a>
+                        </div>
+                    </div>
+
+                    <div class="package-card">
+                        <div class="package-header">
+                            <div class="package-title">National Sponsor</div>
+                            <div class="package-price">₦50M</div>
+                            <div class="package-period">tournament-wide</div>
+                        </div>
+                        <div class="package-content">
+                            <ul class="package-features">
+                                <li><i class="fas fa-check"></i> All Regional Sponsor benefits</li>
+                                <li><i class="fas fa-check"></i> Tournament title sponsorship</li>
+                                <li><i class="fas fa-check"></i> Grand finale naming rights</li>
+                                <li><i class="fas fa-check"></i> Prime TV commercial slots</li>
+                                <li><i class="fas fa-check"></i> VIP match tickets (200)</li>
+                                <li><i class="fas fa-check"></i> Executive hospitality suites</li>
+                                <li><i class="fas fa-check"></i> Year-round partnership</li>
+                                <li><i class="fas fa-check"></i> Custom content creation</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-primary">Choose Package</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Sponsors -->
+        <section class="current-sponsors">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Proud Partners</h2>
+                    <p>Join these leading brands supporting Nigerian football</p>
+                </div>
+
+                <div class="sponsors-grid">
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h4>Partner Company</h4>
+                        <p>National Sponsor</p>
+                    </div>
+
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4>Brand Partner</h4>
+                        <p>Regional Sponsor</p>
+                    </div>
+
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h4>Local Business</h4>
+                        <p>State Sponsor</p>
+                    </div>
+
+                    <div class="sponsor-card">
+                        <div class="sponsor-logo">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Your Company</h4>
+                        <p>Join Us Today</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Become a Sponsor</h2>
+                    <p>Let's discuss how we can create value together</p>
+                </div>
+
+                <form class="contact-form" id="sponsorContactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="companyName">Company Name *</label>
+                            <input type="text" id="companyName" name="companyName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactName">Contact Person *</label>
+                            <input type="text" id="contactName" name="contactName" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactEmail">Email Address *</label>
+                            <input type="email" id="contactEmail" name="contactEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactPhone">Phone Number *</label>
+                            <input type="tel" id="contactPhone" name="contactPhone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sponsorshipType">Sponsorship Interest *</label>
+                            <select id="sponsorshipType" name="sponsorshipType" required>
+                                <option value="">Select Package</option>
+                                <option value="state">State Sponsor (₦2M)</option>
+                                <option value="regional">Regional Sponsor (₦10M)</option>
+                                <option value="national">National Sponsor (₦50M)</option>
+                                <option value="custom">Custom Package</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="preferredState">Preferred State (if applicable)</label>
+                            <select id="preferredState" name="preferredState">
+                                <option value="">Select State</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="companyWebsite">Company Website</label>
+                        <input type="url" id="companyWebsite" name="companyWebsite" placeholder="https://www.yourcompany.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message / Special Requirements</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your sponsorship goals and any specific requirements..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Sponsorship Inquiry</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script src="./script.js"></script>
+    <script>
+        function initSponsorsPage() {
+            populatePreferredStates();
+            initSponsorContactForm();
+        }
+
+        function populatePreferredStates() {
+            const preferredState = document.getElementById('preferredState');
+            window.NaijaFest.nigerianStates.forEach(state => {
+                const option = document.createElement('option');
+                option.value = state.toLowerCase().replace(/\s+/g, '_');
+                option.textContent = state;
+                preferredState.appendChild(option);
+            });
+        }
+
+        function initSponsorContactForm() {
+            const form = document.getElementById('sponsorContactForm');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(form);
+                const sponsorData = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    sponsorData[key] = value;
+                }
+
+                // Validate required fields
+                const requiredFields = ['companyName', 'contactName', 'contactEmail', 'contactPhone', 'sponsorshipType'];
+                const errors = window.NaijaFest.validateForm(sponsorData, requiredFields);
+                
+                if (errors.length > 0) {
+                    showNotification('Please fill in all required fields.', 'error');
+                    return;
+                }
+
+                // Save sponsor inquiry (in real app, send to server)
+                saveSponsorInquiry(sponsorData);
+                
+                // Show success message
+                showNotification('Thank you for your interest! We will contact you within 24 hours.', 'success');
+                
+                // Reset form
+                form.reset();
+            });
+        }
+
+        function saveSponsorInquiry(sponsorData) {
+            // Store sponsor inquiry in localStorage (demo purposes)
+            const inquiries = JSON.parse(localStorage.getItem('sponsor_inquiries') || '[]');
+            sponsorData.id = 'SPONSOR_' + Date.now();
+            sponsorData.submissionDate = new Date().toISOString();
+            inquiries.push(sponsorData);
+            localStorage.setItem('sponsor_inquiries', JSON.stringify(inquiries));
+            
+            console.log('Sponsor inquiry saved:', sponsorData);
+        }
+
+        // Initialize sponsors page
+        document.addEventListener('DOMContentLoaded', initSponsorsPage);
+    </script>
+</body>
+
+</html>
